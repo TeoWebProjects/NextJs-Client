@@ -48,6 +48,7 @@ export const CartIcon = styled.div`
   align-items: center;
   justify-content: center;
   align-content: center;
+  position: relative;
   color: ${(props) => props.theme.colors.gray};
   cursor: pointer;
 
@@ -58,7 +59,6 @@ export const CartIcon = styled.div`
 
 export const Search = styled.input`
   height: 30px;
-  align-self: center;
   background-color: rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.09);
   padding: 1rem;
@@ -69,6 +69,50 @@ export const Search = styled.input`
     display: block;
   }
 `
+
+export const SearchContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  position: relative;
+`
+
+export const SearchResult = styled.div`
+  position: absolute;
+  width: 50%;
+  max-height: 500px;
+  top: 31px;
+  z-index: 99;
+  opacity: 0.98;
+  background-color: #ebe9e9;
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px -2px, rgb(0 0 0 / 24%) 0px 1px 2px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+`
+
+export const SearchProduct = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.9rem;
+  cursor: pointer;
+`
+export const SearchImage = styled.img`
+  width: 40px;
+  height: auto;
+`
+export const SearchName = styled.div``
+
+export const LeftSearchBox = styled.div`
+  display: flex;
+  justify-content: start;
+  gap: 1rem;
+`
+
+export const SearchPrice = styled.div``
+
 export const Right = styled.div`
   display: flex;
   align-items: center;
@@ -85,5 +129,26 @@ export const Login = styled.div`
 
   @media only screen and (max-width: 600px) {
     font-size: 1rem;
+  }
+`
+
+export const CartLength = styled.div`
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  top: -5px;
+  right: -5px;
+
+  &:first-child {
+    align-self: center;
   }
 `

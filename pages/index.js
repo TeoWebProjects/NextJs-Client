@@ -4,7 +4,7 @@ import MobileMenu from '../components/MobileMenu/MobileMenu'
 import { useMobileMenu } from '../Contexts/MobileMenuContext'
 import Link from 'next/link'
 
-export default function Home({ products }) {
+export default function Home() {
   const { isVisibleMobileMenu } = useMobileMenu()
   return (
     <Theme>
@@ -18,14 +18,4 @@ export default function Home({ products }) {
       <Link href="http://localhost:3000/products/create">Create Products</Link>
     </Theme>
   )
-}
-
-// This gets called on every request
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`http://localhost:5000/api/products/categories/28`)
-  const products = await res.json()
-
-  // Pass data to the page via props
-  return { props: { products } }
 }

@@ -5,8 +5,7 @@ import { Products, Title } from './ProductList.style'
 const ProductList = ({ products }) => {
   return (
     <>
-      {console.log(products)}
-      <Title>{products[0].category}</Title>
+      <Title>{products[0].category.name}</Title>
       {products ? (
         <Products>
           {products.map((product) => (

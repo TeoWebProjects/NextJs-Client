@@ -52,7 +52,7 @@ export const ProductCart = styled.div`
 
 export const ProductImage = styled.img`
   align-self: center;
-  width: 20%;
+  width: 10%;
   height: auto;
 `
 

@@ -10,8 +10,6 @@ const CategoryProducts = ({ products }) => {
   return (
     <Theme>
       <Container>{products.message ? <h1>No Products</h1> : <ProductList products={products} />}</Container>
-
-      {console.log(products)}
     </Theme>
   )
 }

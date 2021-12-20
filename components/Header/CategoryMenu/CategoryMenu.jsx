@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
   Container2,
@@ -11,29 +11,22 @@ import {
   BoxCategory,
 } from './CategoryMenu.style'
 const CategoryMenu = () => {
+  const [data, setData] = useState([])
+
+  useEffect(async () => {
+    const quey = await fetch('http://localhost:5000/api/categories')
+    const result = await quey.json()
+    setData(result)
+  }, [])
   return (
     <>
       <Container2>
         <CategoryCon>
-          <Category>
-            <Link href="/products/categories/24">ΓΩΝΙΑΚΗ ΚΑΝΑΠΕΔΕΣ</Link>
-          </Category>
-
-          <Category>
-            <Link href="/products/categories/38">ΓΡΑΦΕΙΑ</Link>
-          </Category>
-
-          <Category>
-            <Link href="/products/categories/38">ΝΤΟΥΛΑΠΕΣ</Link>
-          </Category>
-
-          <Category>
-            <Link href="/products/categories/38">ΚΡΕΒΑΤΙΑ</Link>
-          </Category>
-
-          <Category>
-            <Link href="/products/categories/38">ΠΟΛΥΘΡΟΝΕΣ</Link>
-          </Category>
+          {data.map((cat) => (
+            <Category key={cat._id}>
+              <Link href={`/products/categories/${cat._id}`}>{cat.name}</Link>
+            </Category>
+          ))}
         </CategoryCon>
       </Container2>
     </>

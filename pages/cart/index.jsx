@@ -25,18 +25,22 @@ import {
   ProductDetails,
   InputOption,
 } from './cartPage.style'
+import SelectQuantity from '../../components/SelectQuantity/SelectQuantity'
 
 const CartPage = () => {
   const [subTotal, setSubTotal] = useState(0)
-  const { cart } = useContext(CartContext)
+  const { cart, addToCart, removeProduct } = useContext(CartContext)
 
   useEffect(() => {
     let total = 0
     setSubTotal(0)
     if (cart) {
       cart.forEach((p) => {
-        // setSubTotal(subTotal + p.discountPrice * p.qty.current)
-        total += p.discountPrice
+        if (p.discountPrice === 0) {
+          total += p.price * p.qty.current
+        } else {
+          total += p.discountPrice * p.qty.current
+        }
       })
     }
     setSubTotal(total.toFixed(2))
@@ -52,29 +56,36 @@ const CartPage = () => {
               <Left>
                 {cart.map((product) => (
                   <ProductCart key={product._id}>
-                    <ProductImage
-                      src={product.image.replace(
-                        'https://www.fylliana.gr/images/products/original/',
-                        'https://www.fylliana.gr/images/products/thumb/'
-                      )}
-                    />
+                    <ProductImage src={`http://localhost:5000${product.image}`} />
                     <ProductName>{product.name}</ProductName>
                     <ProductDetails>
-                      {/* <SelectQuantity
+                      <SelectQuantity
                         current={product.qty.current}
                         max={product.qty.max}
                         callback={(e) => {
-                          dispatch(
-                            addToCart(product.product, { current: Number(e.target.value), max: product.qty.max })
-                          )
+                          // addToCart(product.product, { current: Number(e.target.value), max: product.qty.max })
+                          product.qty = { current: Number(e.target.value), max: product.qty.max }
+                          addToCart(product)
                         }}
-                      /> */}
-                      <ProductPrice>
-                        <RegularPrice>{product.price.toFixed(2)}€</RegularPrice>
-                        <DiscountPrice>{product.discountPrice.toFixed(2)}€</DiscountPrice>
-                      </ProductPrice>
+                      />
+                      {product.discountPrice === 0 ? (
+                        <ProductPrice>
+                          <DiscountPrice>{product.price.toFixed(2) * product.qty.current}€</DiscountPrice>
+                        </ProductPrice>
+                      ) : (
+                        <ProductPrice>
+                          <RegularPrice>{product.price.toFixed(2) * product.qty.current}€</RegularPrice>
+                          <DiscountPrice>{product.discountPrice.toFixed(2) * product.qty.current}€</DiscountPrice>
+                        </ProductPrice>
+                      )}
                     </ProductDetails>
-                    <DeleteButton>X</DeleteButton>
+                    <DeleteButton
+                      onClick={() => {
+                        removeProduct(product)
+                      }}
+                    >
+                      X
+                    </DeleteButton>
                   </ProductCart>
                 ))}
               </Left>
@@ -85,7 +96,7 @@ const CartPage = () => {
                   <TotalValue>{subTotal}€</TotalValue>
                 </TotalPrice>
                 <Fix>
-                  <Link href={`http://localhost:3000/`}>
+                  <Link href={`http://localhost:3000/checkout`}>
                     <CheckOutButton>ΟΛΟΚΛΗΡΩΣΗ ΠΑΡΑΓΓΕΛΙΑΣ</CheckOutButton>
                   </Link>
                 </Fix>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Name, Price, Product, ProductImage } from './ProductCard.style'
+import { Name, Price, Product, ProductImage, ContainerImage } from './ProductCard.style'
 import Link from 'next/link'
 
 const ProductCard = ({ name, image, price, id }) => {
@@ -11,7 +11,9 @@ const ProductCard = ({ name, image, price, id }) => {
           query: { productid: id },
         }}
       >
-        <ProductImage src={image} />
+        <ContainerImage>
+          <ProductImage src={`http://localhost:5000${image}`} />
+        </ContainerImage>
       </Link>
       <Name>{name}</Name>
       <Price>{price}€</Price>

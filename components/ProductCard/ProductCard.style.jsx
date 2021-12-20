@@ -14,9 +14,17 @@ export const Product = styled.div`
 `
 export const ProductImage = styled.img`
   display: block;
-  width: 300px;
-  height: 300px;
+  max-width: 300px;
+  height: auto;
   z-index: -1;
+
+  padding: 1rem;
+  object-fit: contain;
+`
+export const ContainerImage = styled.div`
+  width: 100%;
+  height: 300px;
+  display: flex;
   cursor: pointer;
 `
 export const Name = styled.div`

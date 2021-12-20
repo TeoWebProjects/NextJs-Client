@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Container2 = styled.div`
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   background: ${(props) => props.theme.colors.blue};
   color: white;
   @media (max-width: 768px) {
